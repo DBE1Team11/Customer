@@ -55,10 +55,10 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/join",method=RequestMethod.POST)
-	public String join(Model model,@RequestParam("id") String id,@RequestParam("pw") String pw, String pw2,String name,String address, String sex, String email, String job)throws IOException {
+	public String join(Model model,@RequestParam("id") String id,@RequestParam("pw") String pw, String pw2, String phone,String name,String address, String sex, String email, String job)throws IOException {
 
-		if (id == null || pw == null || name == null || id.isEmpty() || pw.isEmpty() || name.isEmpty()) {
-			model.addAttribute("comment", "아이디와 비밀번호 그리고 이름까지 입력해주세요.");
+		if (id == null || pw == null || name == null || phone == null || id.isEmpty() || pw.isEmpty() || name.isEmpty() || phone.isEmpty()) {
+			model.addAttribute("comment", "아이디, 비밀번호, 이름, 번호까지 꼭 입력해주세요.");
 			return "joinForm";
 		}
 		if(customerRepo.idCheck(id)){
@@ -67,7 +67,7 @@ public class LoginController {
 		}
 
 
-		Customer customer = new Customer(id,pw,name,address,sex,email,job);
+		Customer customer = new Customer( id, pw, name, phone, address, sex, email, job);
 
 		customerRepo.addCustomer(customer);
 		System.out.println("Customer : " + customer.getId());
@@ -93,6 +93,7 @@ public class LoginController {
 		if (customer != null) {
 			model.addAttribute("id", customer.getId());
 			model.addAttribute("name", customer.getName());
+			model.addAttribute("phone", customer.getPhone());
 			model.addAttribute("address", customer.getAddress());
 			model.addAttribute("sex", customer.getSex());
 			model.addAttribute("email", customer.getEmail());
