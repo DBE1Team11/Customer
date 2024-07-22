@@ -6,6 +6,7 @@ public class Customer {
 	private String name;
 	private String id; 
 	private String pwd;
+	private String phone;
 	private String address;
 	private String sex;
 	private String email;
@@ -13,10 +14,11 @@ public class Customer {
 	private LocalDateTime date;
 	
 	
-	public Customer(String name, String id, String pwd, String address, String sex, String email, String job) {
+	public Customer(String name, String id, String pwd, String phone, String address, String sex, String email, String job) {
 		this.name = name;
 		this.id = id;
 		this.pwd = pwd;
+		this.phone = phone;
 		this.address = address;
 		this.sex = sex;
 		this.email = email;
@@ -63,6 +65,8 @@ public class Customer {
 	public LocalDateTime getDate() {
 		return date;
 	}
-	
 
+	public String getPhone() {
+		return phone;
+	}
 }

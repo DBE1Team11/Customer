@@ -5,8 +5,9 @@
     <title>INFO</title>
 </head>
 <body>
-  ${id}님 정보
+  ${id}님 정보 <br>
   이름 : ${name} <br>
+  전화번호 : ${phone} <br>
   주소 : ${address} <br>
   성별 : ${sex} <br>
   이메일 : ${email} <br>

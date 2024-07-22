@@ -13,6 +13,7 @@
 	    아이디: <input type="text" name="id" size="10"><br>
 	    비밀번호: <input type="password" name="pw" size="10"><br>
 	    비밀번호 확인 : <input type="password" name="pw2" size="10"><br>
+		전화번호: <input type="text" name="phone" size="10"><br>
 	    이름: <input type="text" name="name" size="10"><br>
 	    주소: <input type="text" name="address" size="10"><br>
 	    성별: <input type="text" name="sex" size="10"><br>
