@@ -8,12 +8,14 @@
 	<title>loginForm</title>
 </head>
 <body>
-	<form action="/customer/login" method ="POST">
-		>ID: <input type="text" name="id" size="10"><br>
+	<form action="/customer/" method ="POST">
+		>ID: <input type="text" name="id" size="10" value=${reid}><br>
 		>PASSWORD: <input type="password" name="pw" size="6" ><br>
 		<div id="error" name="comment">${comment}</div>
+		<input type="checkbox" name="rememberID" value="true"> ID저장<br>
 		<input type="submit" value="LOGIN">
 	</form>
+
 	<form action="/customer/join" method ="GET">
 		<input type="submit" value="JOIN">
 	</form>
