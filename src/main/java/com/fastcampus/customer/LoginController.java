@@ -19,18 +19,16 @@ import org.springframework.web.bind.annotation.*;
 public class LoginController {
 	private CustomerRepository customerRepo = new CustomerRepository();
 	private String reID;
+
 	@GetMapping("/") //spring 4.3 부터 사용가능
-//	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String loginForm() {
 		return "loginForm";
 	}
 
 	//2. 요청과 연결
 	@PostMapping("/") //로그인
-//	@RequestMapping(value = "/login",method=RequestMethod.POST)
-	public String login(@RequestParam("id") String id, @RequestParam("pw")String pw, boolean rememberID, Model model, HttpSession session,HttpServletResponse response)throws IOException {
-		System.out.println("id : " + id + " | pwd : "+ pw);
-		System.out.println("rememberID : " + rememberID);
+	public String login(@RequestParam("id") String id, @RequestParam("pw")String pw, boolean rememberID,
+						Model model, HttpSession session,HttpServletResponse response)throws IOException {
 		if(id == null || pw == null || id.isEmpty() || pw.isEmpty()){ //아이디와 비밀번호 빈지 확인
 			model.addAttribute("comment","아이디 또는 비밀번호를 입력해주세요. ");
 			return "loginForm";
@@ -49,11 +47,9 @@ public class LoginController {
 				Cookie cookie = new Cookie("id",id); //쿠키저장
 				cookie.setMaxAge(60*60*24);//쿠키시간
 				response.addCookie(cookie);//요청에 쿠키 저장
-				System.out.println(cookie.getValue()); //쿠키값
 				reID = cookie.getValue();//쿠키값을 ID저장에 저장
 			}
 			session.setAttribute("id", id);//session에 id저장
-			System.out.println(session.getId());
 			return "welcome";
 		}else{
 			model.addAttribute("comment", "아이디 또는 비밀번호가 일치하지 않습니다.");//비교했는데 틀린경우
@@ -62,15 +58,13 @@ public class LoginController {
 	}
 
 	@GetMapping("/join")
-//	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public String joinForm() {//회원가입 페이지
 		return "joinForm";
 	}
 
 	@PostMapping("/join")//회원가입에서 보내는 페이지
-//	@RequestMapping(value = "/join",method=RequestMethod.POST)
-	public String join(Model model,@RequestParam("id") String id,@RequestParam("pw") String pw, String pw2,@RequestParam String phone,@RequestParam String name,String address, String sex, String email, String job)throws IOException {
-
+	public String join(Model model,@RequestParam String id,@RequestParam String pw, String pw2,@RequestParam String phone,@RequestParam String name,String address, String sex, String email, String job)throws IOException {
+		//id, pw ,phone, name은 필수로 적어야 하므로 RequestParam
 		if (id == null || pw == null || name == null || phone == null || id.isEmpty() || pw.isEmpty() || name.isEmpty() || phone.isEmpty()) {
 			model.addAttribute("comment", "아이디, 비밀번호, 이름, 번호까지 꼭 입력해주세요.");
 			return "joinForm";//id, pw, name, phone 이 null이거나 비어있으면 comment출력
@@ -82,7 +76,6 @@ public class LoginController {
 		//customer 객체 생성후 저장소에 저장
 		Customer customer = new Customer( id, pw, name, phone, address, sex, email, job);
 		customerRepo.addCustomer(customer);
-		System.out.println("Customer : " + customer.getId());
 
 		if(pw.equals(pw2)){ //비밀번호 1차와 2차가 맞으면 로그인 성공 틀리면 일치하지않음 출력
 			model.addAttribute("comment","회원가입완료");
@@ -93,7 +86,6 @@ public class LoginController {
 		}
 	}
 	@GetMapping("/logout")
-//	@RequestMapping(value = "/logout",method = RequestMethod.GET)
 	public String logout(HttpSession session, Model model,HttpServletResponse response){
 		model.addAttribute("reid", reID); //logout 할때 ID저장값 출력
 		session.invalidate();//logout시 session아웃
@@ -105,11 +97,9 @@ public class LoginController {
 	}
 
 	@GetMapping("/info")//회원정보확인
-//	@RequestMapping(value = "/info", method = RequestMethod.GET)
 	public String info(Model model, HttpSession session)throws IOException {
 		String id = session.getAttribute("id").toString();//session값으로 id저장
 		Customer customer = customerRepo.getCustomer(id);//session값에서 가지고 온 id를 저장소에서 가지고와서 customer에 저장
-
 		if (customer != null) {//customer가 null이 아니면 출력
 			model.addAttribute("id", customer.getId());//불러온 id값
 			model.addAttribute("name", customer.getName());//불러온 name값
@@ -126,7 +116,6 @@ public class LoginController {
 		}
 	}
 	@GetMapping("/welcome")
-//	@RequestMapping(value = "/welcome",method = RequestMethod.GET)
 	public String welcome(Model model, HttpSession session){
 		String id = session.getAttribute("id").toString(); //session에 저장된 id값 저장
 		if(id.isEmpty() || id == null){//id가 비거나  null이면 loginform으로
@@ -134,5 +123,9 @@ public class LoginController {
 		}
 		model.addAttribute("id",id);//아니면 welcome에서 id출력
 		return "welcome";
+	}
+	@GetMapping("/updateCustomer")
+	public String updateCustomer(){
+		return "updateCustomer";
 	}
 }

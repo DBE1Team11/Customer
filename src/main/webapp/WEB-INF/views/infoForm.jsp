@@ -17,5 +17,8 @@
     <input type="hidden" name="id" value="${id}">
     <input type="submit" value="BACK">
   </form>
+  <form action="/customer/updateCustomer" method="GET">
+      <input type="submit" value="UPDATE">
+  </form>
 </body>
 </html>
