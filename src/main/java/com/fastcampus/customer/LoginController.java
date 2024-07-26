@@ -114,4 +114,5 @@ public class LoginController {
 		Customer customer = customerRepo.getCustomer(id); //저장된 아이디가 없다?
 		return (customer.getId().equals(id) && customer.getPwd().equals(pw));
 	}
+
 }
