@@ -1,15 +1,17 @@
 package com.fastcampus.customer;
 
-import java.io.IOException;
-import java.net.URLEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import java.io.IOException;
+import java.net.URLEncoder;
 
 @Controller//1. 프로그램 등록
 public class LoginController {
@@ -41,7 +43,7 @@ public class LoginController {
 //			cookie.setMaxAge(60*60*24);//쿠키시간
 		response.addCookie(cookie);//요청에 쿠키 저장
 		model.addAttribute("id", id);//아이디 출력
-		return "welcome";
+		return "redirect:board/list";
 	}
 
 

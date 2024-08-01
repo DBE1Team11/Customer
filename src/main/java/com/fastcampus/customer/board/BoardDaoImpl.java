@@ -52,12 +52,12 @@ public class BoardDaoImpl implements BoardDao{
     @Override
     public List<BoardDto> selectPage(Map map) throws Exception {
         return session.selectList(namespace+"selectPage", map);
-    } // List<E> selectList(String statement, Object parameter)
+    }
 
     @Override
     public List<BoardDto> selectAll() throws Exception {
         return session.selectList(namespace+"selectAll");
-    } // List<E> selectList(String statement)
+    }
 
     @Override
     public int deleteAll() throws Exception {

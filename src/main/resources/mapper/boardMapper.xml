@@ -7,15 +7,15 @@
     </select>
 
     <select id = "select" parameterType="int" resultType="BoardDto">
-        select bno, title, writer, view_cnt, comment_cnt, reg_date
+        select bno, title, content, writer, view_cnt, comment_cnt, reg_date
         from board
         where bno = #{bno}
     </select>
     <insert id="insert" parameterType="BoardDto">
         INSERT INTO board
-        (title, content, writer)
+        (title, content, writer,reg_date)
         VALUES
-            (#{title}, #{content}, #{writer})
+            (#{title}, #{content}, #{writer}, now())
     </insert>
 
     <delete id="delete" parameterType="BoardDto">
@@ -31,7 +31,7 @@
         SET   title = #{title}
           , content = #{content}
           , up_date = now()
-        WHERE bno = #{bno}
+        WHERE bno = #{bno} and writer = #{writer}
     </update>
     <update id="increaseViewCnt" parameterType="int">
         UPDATE board
@@ -47,12 +47,7 @@
         ORDER BY reg_date DESC, bno DESC
     </select>
 
-<!--    <select id="selectFromBoard">-->
-<!--        SELECT bno, title, content, writer, view_cnt, comment_cnt, reg_date-->
-<!--        FROM board-->
-<!--    </select>-->
     <select id="selectPage" parameterType="map" resultType="BoardDto">
-<!--        <include refid="selectFromBoard"/>-->
         SELECT bno, title, content, writer, view_cnt, comment_cnt, reg_date
         FROM board
         ORDER BY reg_date DESC, bno DESC

@@ -3,7 +3,6 @@ package com.fastcampus.customer;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 @ControllerAdvice("com.fastcampus.customer")
 public class GlobalExceptionHandler {

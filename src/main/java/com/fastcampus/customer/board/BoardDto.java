@@ -1,6 +1,6 @@
 package com.fastcampus.customer.board;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class BoardDto {
     private int bno;
@@ -9,8 +9,9 @@ public class BoardDto {
     private String writer;
     private int view_cnt;
     private int comment_cnt;
-    private LocalDateTime reg_date;
+    private Date reg_date;
 
+    BoardDto(){}
     BoardDto(String title, String content, String writer){
         bno=bno+1;
         this.title=title;
@@ -18,7 +19,6 @@ public class BoardDto {
         this.writer=writer;
         view_cnt=0;
         comment_cnt=0;
-        reg_date=LocalDateTime.now();
     }
 
     public int getBno() {
@@ -69,11 +69,11 @@ public class BoardDto {
         this.comment_cnt = comment_cnt;
     }
 
-    public LocalDateTime getReq_date() {
+    public Date getReg_date() {
         return reg_date;
     }
 
-    public void setReq_date(LocalDateTime reg_date) {
+    public void setReg_date(Date reg_date) {
         this.reg_date = reg_date;
     }
 }
